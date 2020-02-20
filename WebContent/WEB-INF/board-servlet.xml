@@ -4,7 +4,8 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 
-	<bean id="defaultHandlerMapping" class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping" />
+	<bean id="defaultHandlerMapping"
+		class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping" />
 
 	<bean id="boardDAO" class="board.dao.boardDAO" />
 
@@ -14,9 +15,42 @@
 		</property>
 	</bean>
 
+	<bean name="/write.do" class="board.controller.WriteActionController">
+		<property name="dao">
+			<ref bean="boardDAO" />
+		</property>
+		<property name="commandClass" value="board.command.BoardCommand" />
+	</bean>
+
+	<bean name="/retrieve.do" class="board.controller.RetrieveActionController">
+		<property name="dao">
+			<ref bean="boardDAO" />
+		</property>
+	</bean>
+
+	<bean name="/update.do" class="board.controller.UpdateActionController">
+		<property name="dao">
+			<ref bean="boardDAO" />
+		</property>
+		<property name="commandClass" value="board.command.BoardCommand" />
+	</bean>
+
+	<bean name="/delete.do" class="board.controller.DeleteActionController">
+		<property name="dao">
+			<ref bean="boardDAO" />
+		</property>
+	</bean>
+
+	<bean name="/search.do" class="board.controller.SearchActionController">
+		<property name="dao">
+			<ref bean="boardDAO" />
+		</property>
+	</bean>
+
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<property name="viewClass" value="org.springframework.web.servlet.view.InternalResourceView" />
+		<property name="viewClass"
+			value="org.springframework.web.servlet.view.InternalResourceView" />
 		<property name="prefix" value="/" />
 		<property name="suffix" value=".jsp" />
 	</bean>
