@@ -1,17 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <Context path="/">
-	<Resource 
-		name="jdbc/myoracle" 
-		auth="Container" 
-		type="javax.sql.DataSource"
+	<Resource name="jdbc/orcl" auth="container" type="javax.sql.DataSource"
 		factory="org.apache.commons.dbcp.BasicDataSourceFactory"
-		driverClassName="oracle.jdbc.driver.OracleDriver" 
-		url="jdbc:oracle:thin:@127.0.0.1:1521:XE"
-		username="lect0220" 
-		password="1234" 
-		maxActive="20" 
-		maxIdle="10"
-		maxWaitMillis="-1">
+		driverClassName="oracle.jdbc.driver.OracleDriver" url="jdbc:oracle:thin:@127.0.0.1:1521:XE"
+		username="lect0220" password="1234" maxActive="20" maxIdle="10">
 	</Resource>
+
 </Context>

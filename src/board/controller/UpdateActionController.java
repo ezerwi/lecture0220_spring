@@ -14,8 +14,16 @@ import org.springframework.validation.BindException;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.AbstractCommandController;
 
+import board.dao.BoardDAO;
+
 public class UpdateActionController extends AbstractCommandController {
 
+	private BoardDAO dao;
+	
+	public void setDao(BoardDAO dao) {
+		this.dao = dao;
+	}
+	
 	@Override
 	protected ModelAndView handle(HttpServletRequest arg0, HttpServletResponse arg1, Object arg2, BindException arg3)
 			throws Exception {

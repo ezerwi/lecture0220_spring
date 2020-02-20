@@ -7,7 +7,7 @@
 	<bean id="defaultHandlerMapping"
 		class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping" />
 
-	<bean id="boardDAO" class="board.dao.boardDAO" />
+	<bean id="boardDAO" class="board.dao.BoardDAO" />
 
 	<bean name="/list.do" class="board.controller.ListActionController">
 		<property name="dao">
