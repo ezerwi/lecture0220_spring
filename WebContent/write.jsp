@@ -18,11 +18,16 @@
 		
 	}
 	#text {
-		width: 500px;
+		width: 650px;
 	}
-	#submit {
-		width: 200px;
+	#submit_btn {
+		width: 850px;
 		height: 50px;
+		cursor: pointer;
+		background-color: grey;
+		border-style: solid;
+		color: white;
+		font-weight: bolder;
 	}
 </style>
 </head>
@@ -48,11 +53,11 @@
 
 			<tr>
 				<th>내용</th>
-				<td><textarea name = "content" cols="75" rows="30"></textarea></td>
+				<td><textarea name = "content" cols = "90" rows="30"></textarea></td>
 			</tr>
 			
 			<tr>
-				<td colspan="2" ><input id = "submit" type = "submit" value = "작성완료"></td>
+				<td colspan="2" ><br><input id = "submit_btn" type = "submit" value = "작성완료"><br></td>
 			</tr>
 		</table>
 	</form>

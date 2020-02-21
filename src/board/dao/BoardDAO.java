@@ -103,13 +103,12 @@ public class BoardDAO {
 		return newNum;
 	}	// getNewNum()
 	
-	
 	/*
 	 * 글 쓰기 Method
 	 * 원래는 write(BoardCommand data) 가 정석이지만
 	 * 여기서는 3개만 전달 받기 위해 parameter 지정
 	 */
-	public void write(String author, String title, String content) {
+	public void write(String author, String content, String title) {
 		int newNum = this.getNewNum();
 		System.out.println("__write()__newNum__"+newNum);
 		
