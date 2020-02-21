@@ -8,6 +8,8 @@
 
 package board.controller;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -25,9 +27,16 @@ public class SearchActionController implements Controller {
 	}
 	
 	@Override
-	public ModelAndView handleRequest(HttpServletRequest arg0, HttpServletResponse arg1) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+	public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
+		String searchType = request.getParameter("searchType");
+		String searchText = request.getParameter("searchText");
+		
+		ArrayList list = this.dao.search(searchType, searchText);
+		ModelAndView mav = new ModelAndView("list");
+		mav.addObject("list", list);
+				
+		return mav;
 	}
 
 }

@@ -202,4 +202,50 @@ public class BoardDAO {
 		
 	}	// delete()
 	
+	public ArrayList search(String searchType, String searchText){
+		
+		ArrayList<BoardDTO> s_list = new ArrayList<BoardDTO>();
+		
+		String q = "SELECT * FROM SPRINGBOARD ";
+		if(searchType.equals("title")) {
+			q += " WHERE TITLE LIKE ";
+		}
+		else if(searchType.equals("author")) {
+			q += " WHERE AUTHOR LIKE "+searchText;
+		}
+		else if(searchType.equals("content")) {
+			q += " WHERE CONTENT LIKE "+searchText;
+		}
+		q += "'%"+searchText+"%' ORDER BY NUM DESC";
+		
+		System.out.println("____q_____"+q);
+		
+		try {
+			Connection conn = this.ds.getConnection();
+			PreparedStatement st = conn.prepareStatement(q);
+			ResultSet rs = st.executeQuery();
+			
+			while (rs.next()) {
+				BoardDTO data = new BoardDTO();
+				data.setNum(rs.getInt("num"));
+				data.setTitle(rs.getString("title"));
+				data.setAuthor(rs.getString("author"));
+				data.setContent(rs.getString("content"));
+				data.setReadcnt(rs.getInt("readcnt"));
+				data.setDate(rs.getString("writeday"));
+				
+				s_list.add(data);
+			}
+			
+			rs.close();
+			st.close();
+			conn.close();
+		} catch (SQLException e) {
+			System.out.println("___ERR___search()___"+e.getMessage());
+		}
+		
+		
+		
+		return s_list;
+	}	// search()
 }

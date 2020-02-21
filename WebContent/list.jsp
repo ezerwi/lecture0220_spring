@@ -86,7 +86,6 @@
 		<option value="author">작성자</option>
 		<option value="content">내용</option>
 	</select>
-	
 	<input type = "text" name = "searchText" /><input type = "submit" value = "검색" />
 	</form>
 	</td>
