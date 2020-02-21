@@ -12,8 +12,30 @@
 <title>BOARDLIST</title>
 
 <style type="text/css">
-	.TABLE {
-	HEIGHT : 50PX;
+	tr {
+		height : 50px
+	}
+	input {
+		height : 37px;
+	}
+	select {
+		height : 37px;
+		width: 120px;
+		text-align-last : "center";
+		direction : inherit;
+	}
+	option {
+		
+	}
+	#selectone {
+		text-align : "center";
+		height: 37px;
+		width : 200px;
+		border-width: 2px;
+		border-style : double;
+		border-color : gray;
+		background-color: white;
+		cursor: pointer;
 	}
 </style>
 </head>
@@ -44,9 +66,9 @@
 	
 	
 	<c:forEach var="one" items="${list}">
-		<tr align="CENTER" HEIGHT = "50PX">
+		<tr align="CENTER" >
 		<td>${one.getNum() }</td>
-		<td>${one.getTitle() }</td>
+		<td><input id = "selectone" TYPE="button" VALUE = "${one.getTitle() }" onclick="location.href = 'retrive.do?num='+${one.getNum()}">	</td>
 		<td>${one.getAuthor()}</td>
 		<td>${one.getDate() }</td>
 		<td>${one.getReadcnt() }</td>
@@ -55,7 +77,7 @@
 	
 	<tr>
 	
-	<td colspan="5" align="center"  HEIGHT = "50PX">
+	<td colspan="5" align="center" >
 	<form action="search" method="GET" > 
 	<select name = "searchType" >
 		<option value="title">제목</option>

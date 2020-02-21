@@ -31,12 +31,11 @@ public class ListActionController implements Controller {
 
 	/*
 	 * dao 는 board-servlet.xml <bean name = "list.do"~~> <property ~~~>에 의해 주입
-	 *
 	 */
 	@Override
 	public ModelAndView handleRequest(HttpServletRequest arg0, HttpServletResponse arg1) throws Exception {
 		
-		System.out.println("__CALL__ListActionController___");
+//		System.out.println("__CALL__ListActionController___");
 		
 		ArrayList<BoardDTO> list = dao.list();
 		ModelAndView mav = new ModelAndView();
