@@ -38,6 +38,7 @@
 		</colgroup>
 		
 		<form action = "update.do" >
+		<input type = "hidden" name = "num" value = "${data.getNum() }">
 		<tr>
 			<th>제 목</th>
 			<td><input id="__text__" type = "text" value = ${data.getTitle() } name = "title" /></td>

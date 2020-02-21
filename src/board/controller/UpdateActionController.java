@@ -14,6 +14,7 @@ import org.springframework.validation.BindException;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.AbstractCommandController;
 
+import board.command.BoardCommand;
 import board.dao.BoardDAO;
 
 public class UpdateActionController extends AbstractCommandController {
@@ -25,10 +26,19 @@ public class UpdateActionController extends AbstractCommandController {
 	}
 	
 	@Override
-	protected ModelAndView handle(HttpServletRequest arg0, HttpServletResponse arg1, Object arg2, BindException arg3)
+	protected ModelAndView handle(HttpServletRequest request, HttpServletResponse response, Object command, BindException error)
 			throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		request.setCharacterEncoding("UTF-8");
+		
+		BoardCommand data = (BoardCommand) command;
+		String num = request.getParameter("num");
+//		System.out.println("___________num_____________"+num);
+//		String author = data.getAuthor();
+//		String title = data.getTitle();
+//		String content = data.getContent();
+		
+		this.dao.update(data, num);
+		return new ModelAndView("redirect:/list.do");
 	}
 
 }

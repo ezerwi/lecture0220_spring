@@ -27,6 +27,7 @@ import javax.naming.NamingException;
 // Context.xml <Resource>에서 설정한 내용 불러옴
 import javax.sql.DataSource;
 
+import board.command.BoardCommand;
 // DTO(=Model) 객체
 import board.dto.BoardDTO;
 
@@ -83,8 +84,8 @@ public class BoardDAO {
 		return list;
 
 	} // list()
-	// list()
-	
+		// list()
+
 	// SQL에서 sequence 안만들었기 때문에 필요한 Method
 	public int getNewNum() {
 		int newNum = 1;
@@ -94,28 +95,26 @@ public class BoardDAO {
 			conn = ds.getConnection();
 			PreparedStatement pstmt = conn.prepareStatement(q);
 			ResultSet rs = pstmt.executeQuery();
-			if(rs.next()) {
+			if (rs.next()) {
 				newNum = rs.getInt(1) + 1;
 			}
 		} catch (SQLException e) {
-			System.out.println("ERR_getNewNum()__"+e.getMessage());
+			System.out.println("ERR_getNewNum()__" + e.getMessage());
 		}
 		return newNum;
-	}	// getNewNum()
-	
+	} // getNewNum()
+
 	/*
-	 * 글 쓰기 Method
-	 * 원래는 write(BoardCommand data) 가 정석이지만
-	 * 여기서는 3개만 전달 받기 위해 parameter 지정
+	 * 글 쓰기 Method 원래는 write(BoardCommand data) 가 정석이지만 여기서는 3개만 전달 받기 위해
+	 * parameter 지정
 	 */
 	public void write(String author, String content, String title) {
 		int newNum = this.getNewNum();
-		System.out.println("__write()__newNum__"+newNum);
-		
+		System.out.println("__write()__newNum__" + newNum);
+
 		String q = "INSERT INTO SPRINGBOARD (NUM, AUTHOR, TITLE, CONTENT) VALUES (?, ?, ?, ?)";
-		System.out.println("__write()__query__"+q);
-		
-		
+		System.out.println("__write()__query__" + q);
+
 		try {
 			Connection conn = this.ds.getConnection();
 			PreparedStatement stmt = conn.prepareStatement(q);
@@ -123,48 +122,68 @@ public class BoardDAO {
 			stmt.setString(2, author);
 			stmt.setString(3, title);
 			stmt.setString(4, content);
-			stmt.executeUpdate(); 
-			
+			stmt.executeUpdate();
+
 			stmt.close();
 			conn.close();
 		} catch (SQLException e) {
-			System.out.println("__ERR_write()__"+e.getMessage());
-		} 
-		
-	}	// write()
-	
+			System.out.println("__ERR_write()__" + e.getMessage());
+		}
+
+	} // write()
+
 	public BoardDTO retrieve(String num) {
 		BoardDTO data = new BoardDTO();
-		
+
 		String q_select = "SELECT * FROM SPRINGBOARD WHERE NUM = ?";
 		String q_readcnt = "UPDATE SPRINGBOARD SET READCNT = READCNT+1 WHERE NUM=?";
-		
+
 		try {
 			Connection conn = this.ds.getConnection();
 			PreparedStatement stmt = conn.prepareStatement(q_readcnt);
 			stmt.setString(1, num);
 			int update = stmt.executeUpdate();
-			
+
 			stmt = null;
 			stmt = conn.prepareStatement(q_select);
 			stmt.setString(1, num);
 			ResultSet rs = stmt.executeQuery();
-			
-			if(rs.next()){
+
+			if (rs.next()) {
 				data.setNum(rs.getInt("num"));
 				data.setReadcnt(rs.getInt("readcnt"));
 				data.setTitle(rs.getString("title"));
 				data.setAuthor(rs.getString("author"));
 				data.setContent(rs.getString("content"));
 			}
-			
+
 			rs.close();
 			stmt.close();
 			conn.close();
 		} catch (SQLException e) {
-			System.out.println("__ERR__retrieve()__"+e.getMessage());
+			System.out.println("__ERR__retrieve()__" + e.getMessage());
 		}
-		
+
 		return data;
-	}	// retrieve()
+	} // retrieve()
+
+	public void update(BoardCommand data, String num) {
+
+		String q = "UPDATE SPRINGBOARD SET AUTHOR = ?, TITLE = ?, CONTENT = ? WHERE NUM = ?";
+		try {
+			Connection conn = this.ds.getConnection();
+			PreparedStatement st = conn.prepareStatement(q);
+			st.setString( 1, data.getAuthor());
+			st.setString( 2, data.getTitle());
+			st.setString( 3, data.getContent());
+			st.setString( 4, num);
+			st.executeUpdate();
+			
+			st.close();
+			conn.close();
+		} catch (SQLException e) {
+			System.out.println("__ERR__update()__"+e.getMessage());
+		}
+	}
+
 }
