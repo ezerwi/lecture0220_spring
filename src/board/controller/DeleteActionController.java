@@ -25,9 +25,14 @@ public class DeleteActionController implements Controller {
 	}
 	
 	@Override
-	public ModelAndView handleRequest(HttpServletRequest arg0, HttpServletResponse arg1) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+	public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+		request.setCharacterEncoding("UTF-8");
+		
+		String num = request.getParameter("num");
+		this.dao.delete(num);
+		
+		return new ModelAndView ("redirect:/list.do");
 	}
 
 }

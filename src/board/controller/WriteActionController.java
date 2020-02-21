@@ -41,8 +41,7 @@ public class WriteActionController extends AbstractCommandController {
 		 String content = data.getContent();
 		 String title = data.getTitle();
 		
-//		this.dao.write(data);
-		this.dao.write(author, content, title);
+		this.dao.write(data);
 		
 		return new ModelAndView("redirect:/list.do");
 		/*

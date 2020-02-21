@@ -108,7 +108,7 @@ public class BoardDAO {
 	 * 글 쓰기 Method 원래는 write(BoardCommand data) 가 정석이지만 여기서는 3개만 전달 받기 위해
 	 * parameter 지정
 	 */
-	public void write(String author, String content, String title) {
+	public void write(BoardCommand data) {
 		int newNum = this.getNewNum();
 		System.out.println("__write()__newNum__" + newNum);
 
@@ -119,9 +119,9 @@ public class BoardDAO {
 			Connection conn = this.ds.getConnection();
 			PreparedStatement stmt = conn.prepareStatement(q);
 			stmt.setInt(1, newNum);
-			stmt.setString(2, author);
-			stmt.setString(3, title);
-			stmt.setString(4, content);
+			stmt.setString(2, data.getAuthor());
+			stmt.setString(3, data.getTitle());
+			stmt.setString(4, data.getContent());
 			stmt.executeUpdate();
 
 			stmt.close();
@@ -186,4 +186,20 @@ public class BoardDAO {
 		}
 	}
 
+	public void delete(String num) {
+		String q = "DELETE FROM SPRINGBOARD WHERE NUM = ?";
+		try {
+			Connection conn = this.ds.getConnection();
+			PreparedStatement st = conn.prepareStatement(q);
+			st.setString(1, num);
+			st.executeUpdate();
+			
+			st.close();
+			conn.close();
+		} catch (SQLException e) {
+			System.out.println("___ERR___delete()___"+e.getMessage());
+		}
+		
+	}	// delete()
+	
 }

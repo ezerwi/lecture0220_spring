@@ -13,6 +13,9 @@
 
 <style type="text/css">
 
+	body {
+		text-align: center;
+	}
 	table {
 		border-style: solid;
 		border-width: 2px;
@@ -26,14 +29,10 @@
 	select {
 		height : 37px;
 		width: 120px;
-		text-align-last : "center";
-		direction : inherit;
-	}
-	option {
-		
+		text-align-last : center;
 	}
 	#selectone {
-		text-align : "center";
+		text-align : center;
 		height: 37px;
 		width : 200px;
 		border-width: 0px;
@@ -43,7 +42,7 @@
 </style>
 </head>
 <body>
-	<H1>XML 성공~!</H1>
+	<h1>게시판 글 목록</h1>
 	
 	<table border = "1">
 	
