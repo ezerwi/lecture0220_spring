@@ -133,5 +133,38 @@ public class BoardDAO {
 		
 	}	// write()
 	
-	
+	public BoardDTO retrieve(String num) {
+		BoardDTO data = new BoardDTO();
+		
+		String q_select = "SELECT * FROM SPRINGBOARD WHERE NUM = ?";
+		String q_readcnt = "UPDATE SPRINGBOARD SET READCNT = READCNT+1 WHERE NUM=?";
+		
+		try {
+			Connection conn = this.ds.getConnection();
+			PreparedStatement stmt = conn.prepareStatement(q_readcnt);
+			stmt.setString(1, num);
+			int update = stmt.executeUpdate();
+			
+			stmt = null;
+			stmt = conn.prepareStatement(q_select);
+			stmt.setString(1, num);
+			ResultSet rs = stmt.executeQuery();
+			
+			if(rs.next()){
+				data.setNum(rs.getInt("num"));
+				data.setReadcnt(rs.getInt("readcnt"));
+				data.setTitle(rs.getString("title"));
+				data.setAuthor(rs.getString("author"));
+				data.setContent(rs.getString("content"));
+			}
+			
+			rs.close();
+			stmt.close();
+			conn.close();
+		} catch (SQLException e) {
+			System.out.println("__ERR__retrieve()__"+e.getMessage());
+		}
+		
+		return data;
+	}	// retrieve()
 }

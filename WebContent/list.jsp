@@ -36,10 +36,8 @@
 		text-align : "center";
 		height: 37px;
 		width : 200px;
-		border-width: 2px;
-		border-style : double;
-		border-color : gray;
-		background-color: white;
+		border-width: 0px;
+		background-color: #D1CEC6;
 		cursor: pointer;
 	}
 </style>
@@ -73,7 +71,7 @@
 	<c:forEach var="one" items="${list}">
 		<tr align="CENTER" >
 		<td>${one.getNum() }</td>
-		<td><input id = "selectone" TYPE="button" VALUE = "${one.getTitle() }" onclick="location.href = 'retrive.do?num='+${one.getNum()}">	</td>
+		<td><input id = "selectone" TYPE="button" VALUE = "${one.getTitle() }" onclick="location.href = 'retrieve.do?num='+${one.getNum()}">	</td>
 		<td>${one.getAuthor()}</td>
 		<td>${one.getDate().substring(0,10) }</td>
 		<td>${one.getReadcnt() }</td>

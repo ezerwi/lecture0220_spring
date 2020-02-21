@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.Controller;
 
 import board.dao.BoardDAO;
+import board.dto.BoardDTO;
 
 public class RetrieveActionController implements Controller {
 
@@ -24,9 +25,18 @@ public class RetrieveActionController implements Controller {
 	}
 	
 	@Override
-	public ModelAndView handleRequest(HttpServletRequest arg0, HttpServletResponse arg1) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+	public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+		String num = request.getParameter("num");
+		System.out.println("__retrieve__num__"+num);
+		
+		BoardDTO data = this.dao.retrieve(num);
+		
+		ModelAndView mav = new ModelAndView("retrieve");
+		mav.addObject("data", data);
+		request.setAttribute("data", data);
+		
+		return mav;
 	}
 
 }
