@@ -14,6 +14,7 @@ import org.springframework.validation.BindException;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.AbstractCommandController;
 
+import board.command.BoardCommand;
 import board.dao.BoardDAO;
 
 public class WriteActionController extends AbstractCommandController {
@@ -25,10 +26,42 @@ public class WriteActionController extends AbstractCommandController {
 	}
 
 	@Override
-	protected ModelAndView handle(HttpServletRequest arg0, HttpServletResponse arg1, Object arg2, BindException arg3)
+	protected ModelAndView handle(HttpServletRequest request, HttpServletResponse response, Object command, BindException error)
 			throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		
+		request.setCharacterEncoding("UTF-8");
+		
+		BoardCommand data = (BoardCommand) command;
+		/*
+		 * Spring에서 아래와 같은 작업은 더이상 필요 없음
+		 * 
+		 */
+		
+		 String author = data.getAuthor();
+		 String content = data.getContent();
+		 String title = data.getTitle();
+		
+//		this.dao.write(data);
+		this.dao.write(author, content, title);
+		
+		return new ModelAndView("redirect:/list.do");
+		/*
+		 * redirect 없이 ModelAndView("list.do")를 입력하면
+		 * list.do.jsp로 이동하게 됨
+		 */
+		/*
+		 * 동일 방식
+		 * 1. Servlet Model2 방식 
+		 * response.sendRedirect("list.jsp");
+		 * 
+		 *  2. ModelAndView
+		 *  ModelAndView mav = new ModelAndView();
+		 *  mav.setViewName("list");
+		 *  또는
+		 *  ModelAndView mav = new ModelAndView("list");
+		 *  
+		 *  return mav
+		 */
 	}
 
 }

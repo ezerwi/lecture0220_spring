@@ -83,5 +83,56 @@ public class BoardDAO {
 		return list;
 
 	} // list()
-
+	// list()
+	
+	// SQL에서 sequence 안만들었기 때문에 필요한 Method
+	public int getNewNum() {
+		int newNum = 1;
+		String q = "select max(num) from springboard";
+		Connection conn;
+		try {
+			conn = ds.getConnection();
+			PreparedStatement pstmt = conn.prepareStatement(q);
+			ResultSet rs = pstmt.executeQuery();
+			if(rs.next()) {
+				newNum = rs.getInt(1) + 1;
+			}
+		} catch (SQLException e) {
+			System.out.println("ERR_getNewNum()__"+e.getMessage());
+		}
+		return newNum;
+	}	// getNewNum()
+	
+	
+	/*
+	 * 글 쓰기 Method
+	 * 원래는 write(BoardCommand data) 가 정석이지만
+	 * 여기서는 3개만 전달 받기 위해 parameter 지정
+	 */
+	public void write(String author, String title, String content) {
+		int newNum = this.getNewNum();
+		System.out.println("__write()__newNum__"+newNum);
+		
+		String q = "INSERT INTO SPRINGBOARD (NUM, AUTHOR, TITLE, CONTENT) VALUES (?, ?, ?, ?)";
+		System.out.println("__write()__query__"+q);
+		
+		
+		try {
+			Connection conn = this.ds.getConnection();
+			PreparedStatement stmt = conn.prepareStatement(q);
+			stmt.setInt(1, newNum);
+			stmt.setString(2, author);
+			stmt.setString(3, title);
+			stmt.setString(4, content);
+			stmt.executeUpdate(); 
+			
+			stmt.close();
+			conn.close();
+		} catch (SQLException e) {
+			System.out.println("__ERR_write()__"+e.getMessage());
+		} 
+		
+	}	// write()
+	
+	
 }

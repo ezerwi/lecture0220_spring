@@ -42,9 +42,12 @@ public class ListActionController implements Controller {
 		mav.setViewName("list");
 		// list.jsp
 		// ViewResolver에서 .jsp 추가했기 때문에 안써도 됨
+		// 
 		
 		mav.addObject("list", list);
 		// servlet에서 request.setAttribute()와 동일한 역할
+		// parameter가 Object type이기 때문에
+		// list를 ArrayList가 아닌 Object 로 감싸서 저장
 		
 		return mav;
 		// DispatcherServlet에 전달

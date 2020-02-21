@@ -1,12 +1,61 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>WRITE.JSP</title>
+<style>
+	table {
+		border-style: solid;
+		border-width: 4px;
+		text-align: center;
+	}
+	tr th td {
+		border-style: solid;
+		border-width: 1px;
+		border-color: grey;
+		
+	}
+	#text {
+		width: 500px;
+	}
+	#submit {
+		width: 200px;
+		height: 50px;
+	}
+</style>
 </head>
 <body>
+	<h1>글쓰기</h1>
+
+	<form action="write.do">
+		<table>
+			<colgroup>
+				<col width="150px">
+				<col width="700px">
+			</colgroup>
+
+			<tr>
+				<th>제목</th>
+				<td><input id = "text" type="text" name="title" required="required"></td>
+			</tr>
+
+			<tr>
+				<th>작성자</th>
+				<td><input id = "text" type="text" name="author" required="required"></td>
+			</tr>
+
+			<tr>
+				<th>내용</th>
+				<td><textarea name = "content" cols="75" rows="30"></textarea></td>
+			</tr>
+			
+			<tr>
+				<td colspan="2" ><input id = "submit" type = "submit" value = "작성완료"></td>
+			</tr>
+		</table>
+	</form>
 
 </body>
 </html>

@@ -14,6 +14,11 @@
 			<ref bean="boardDAO" />
 		</property>
 	</bean>
+	
+	<bean name="/writeui.do" class="org.springframework.web.servlet.mvc.ParameterizableViewController">
+		<property name="viewName" value="write" ></property>
+	</bean>
+	
 
 	<bean name="/write.do" class="board.controller.WriteActionController">
 		<property name="dao">

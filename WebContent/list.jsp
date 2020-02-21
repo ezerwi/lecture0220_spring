@@ -12,6 +12,11 @@
 <title>BOARDLIST</title>
 
 <style type="text/css">
+
+	table {
+		border-style: solid;
+		border-width: 2px;
+	}
 	tr {
 		height : 50px
 	}
@@ -53,7 +58,7 @@
 	</colgroup>
 	
 	<tr>
-	<td colspan = "5" align = "center"> ***게시판 목록*** <input type = "button" value = "글쓰기" onclick = "location.href='#'" /></td>
+	<td colspan = "5" align = "center"> ***게시판 목록*** <input type = "button" value = "글쓰기" onclick = "location.href='writeui.do'" /></td>
 	</tr>
 	
 	<tr align = "center">
@@ -70,7 +75,7 @@
 		<td>${one.getNum() }</td>
 		<td><input id = "selectone" TYPE="button" VALUE = "${one.getTitle() }" onclick="location.href = 'retrive.do?num='+${one.getNum()}">	</td>
 		<td>${one.getAuthor()}</td>
-		<td>${one.getDate() }</td>
+		<td>${one.getDate().substring(0,10) }</td>
 		<td>${one.getReadcnt() }</td>
 		</tr>
 	</c:forEach>
@@ -78,11 +83,11 @@
 	<tr>
 	
 	<td colspan="5" align="center" >
-	<form action="search" method="GET" > 
-	<select name = "searchType" >
+	<form action="search.do" method="GET" > 
+	<select name = "searchType" size = "1" >
 		<option value="title">제목</option>
 		<option value="author">작성자</option>
-		<option value="contents">내용</option>
+		<option value="content">내용</option>
 	</select>
 	
 	<input type = "text" name = "searchText" /><input type = "submit" value = "검색" />
